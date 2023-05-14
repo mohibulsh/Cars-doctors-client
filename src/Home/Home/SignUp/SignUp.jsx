@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import loginIcon from '../../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
 const SignUp = () => {
+    const {createUsers}=useContext(AuthContext)
+    const [success,setSuccess]=useState('')
+    const [error,setError]=useState('')
     const handlerSignUp = (event) => {
+        setError('')
+        setSuccess('')
         event.preventDefault()
         const form = event.target;
         const email =form.email.value;
         const password =form.password.value;
         const name =form.name.value;
         console.log(name,email,password)
+        createUsers(email,password)
+        .then(result=>{
+            const signUpUsers = result.user;
+            console.log(signUpUsers)
+            setSuccess('sign up successfully')
+            form.reset()
+        })
+        .catch(error=>{
+          setError(error.message)
+        })
+
     }
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -48,6 +65,8 @@ const SignUp = () => {
                                 <Link className='font-bold text-orange-500 ml-2 hover:text-orange-700 cursor-pointer' to='/login'
                                 >Login</Link></p>
                         </form>
+                        <p className='text-red-500 py-2'>{error}</p>
+                        <p className='text-green-500'>{success}</p>
                     </div>
                 </div>
             </div>
