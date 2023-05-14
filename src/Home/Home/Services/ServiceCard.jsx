@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineArrowRight } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 const ServiceCard = ({service}) => {
     const {_id,title,img,price} =service
@@ -11,8 +11,8 @@ const ServiceCard = ({service}) => {
           <p><span className='text-xl font-bold text-orange-500'>
             Price : </span>${price}</p>
           <div className="card-actions justify-end text-3xl">
-             <span className='cursor-pointer hover:text-orange-700'>
-                <AiOutlineArrowRight/></span>
+             <Link to={`/checkout/${_id}`} className='cursor-pointer '>
+             <button  className="btn btn-primary">Book Now</button></Link>
           </div>
         </div>
       </div>
