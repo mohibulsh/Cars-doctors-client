@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg'
 import { FcSearch } from "react-icons/fc";
 import { AiOutlineShopping} from "react-icons/ai";
+import { AuthContext } from '../../../Provider/AuthProvider';
 
 
 const NavBar = () => {
+    const {logOut,user}=useContext(AuthContext)
+    const handerLogOut =()=>{
+        logOut()
+        .then(()=>{})
+        .catch(error=>console.log(error))
+    }
     const navIteam = <>
-        <li><Link to='/home'>Home</Link></li>
+        <li><Link to='/'>Home</Link></li>
         <li><Link to='/about'>About</Link></li>
         <li><Link to='/services'>Services</Link></li>
         <li><Link to='/blogs'>Blogs</Link></li>
-        <li><Link to='/contact'>Contact</Link></li>
+        {
+           user?.email?<li><Link onClick={handerLogOut}>Log out</Link></li>:
+            <li><Link to='/login'>LogIn</Link></li> 
+        }
     </>
     return (
         <div className="navbar bg-base-100 px-8 mb-4 h-32">
