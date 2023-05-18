@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2'
 const CheckOut = () => {
-    const {_id, title, price } = useLoaderData()
+    const {_id, title, price,img} = useLoaderData()
     const {user} =useContext(AuthContext)
     const handlerCheckOut = (event)=>{
         event.preventDefault()
@@ -20,9 +20,10 @@ const CheckOut = () => {
             price2,
             date,
             service_id:_id,
-            title
+            title,
+            img
         }
-        fetch('http://localhost:5000/booking',{
+        fetch('http://localhost:5000/bookings',{
             method:"POST",
             headers:{
              'Content-Type': 'application/json'
