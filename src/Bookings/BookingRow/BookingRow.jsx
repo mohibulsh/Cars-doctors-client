@@ -6,7 +6,7 @@ const BookingRow = ({ booking, setBookings, bookings, }) => {
     const { _id, date, email, name, phone, price2, title, img,status } = booking;
  
     const handlerDelete = id => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://car-doctors-server-two.vercel.app/bookings/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
@@ -55,7 +55,7 @@ const BookingRow = ({ booking, setBookings, bookings, }) => {
     }
     // confirm booking
     const handlerConfirmBooking = id =>{
-        fetch(`http://localhost:5000/bookings/${id}`,{
+        fetch(`https://car-doctors-server-two.vercel.app/bookings/${id}`,{
             method:"PATCH",
             headers:{
                 'Content-Type': 'application/json'
